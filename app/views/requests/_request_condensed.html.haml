@@ -1,0 +1,27 @@
+- if !request.dinner.picture.blank?
+  %span.round-thumb-medium.img-rounded.pull-left{ style:'background-image:url('+request.dinner.picture.url+');'}
+- else
+  %span.round-thumb-medium.img-rounded.pull-left
+.media-body
+  .notification-body
+    %strong
+      = request.subject
+    .description
+      = truncate(request.body, length: 50)
+  .notification-footer
+    %i.icon-envelope.black
+    %small
+      = timediff_string request.created_at
+  - if request.hiker != current_hiker
+    .notification-options
+      %a.no-hover-underline{href: "#", onclick: "answerRequest(#{request.id.to_s}, true)"}
+        %span.badge-success.badge
+          %div{style: "color: white"}
+            %i.icon-thumbs-up-alt
+              Accept
+      %a.no-hover-underline{href: "#", onclick: "answerRequest(#{request.id.to_s}, false)"}
+        %span.badge-important.badge
+          %div{style: "color: white"}
+            %i.icon-thumbs-down-alt
+              Decline
+  

@@ -1,0 +1,17 @@
+.navbar-fixed-top, .alert {
+	margin-bottom: 0px;
+}
+
+
+.pull-left {
+	margin-right: 10px;
+}
+
+.valign-super {
+  vertical-align: super;
+}
+
+.nav .dropdown-toggle .caret {
+	border-top-color: #FFF;
+	border-bottom-color: #FFF;
+}

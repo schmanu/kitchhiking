@@ -1,0 +1,17 @@
+= form_for @request, url: url_for(controller: "requests", action: "create"), html: {multipart: true} do |form|  
+  =form.hidden_field :dinner_id
+  .media-body
+    .dinner-text
+      .dinner-header.row-fuid
+        .span12
+          %strong
+            =t('request.subject')
+          %br
+          = form.text_field :subject
+      .dinner-body.row-fluid
+        .span12
+          %strong
+            =t('request.body') 
+            %br
+          =form.text_area :body, size: "10x6"
+        %div= form.submit "Send Request", class: 'btn btn-primary'

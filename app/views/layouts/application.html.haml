@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    %title= t('application.title')
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true 
+    = csrf_meta_tags
+  %body
+    = render partial: "navbar"
+    = render partial: "alerts"
+    = yield
+  = javascript_include_tag "bootstrap"
+  %script{:type=>"text/javascript"}
+    initPopovers();
+    initDateTimePickers();
+
+

@@ -1,0 +1,15 @@
+.alert-container
+  - if !@hiker.blank? && @hiker.errors.any?
+    - @hiker.errors.each do |key, value|
+      .alert{ :class => "alert-error" }
+        %button.close{ :data => { :dismiss => "alert" } } x
+        %strong
+          = value.first
+
+  - if !@request.blank? && @request.errors.any?
+    - @request.errors.full_messages.each do |key, value|
+      .alert{ :class => "alert-error" }
+        %button.close{ :data => { :dismiss => "alert" } } x
+        %strong
+          = key
+          = value

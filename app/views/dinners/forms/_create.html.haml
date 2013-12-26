@@ -1,0 +1,32 @@
+= form_for @dinner, url: url_for(controller: "dinners", action: "create"), html: {multipart: true} do |form|  
+  / %input{type: "hidden", id:"dinner_id", name:"dinner[id]", value:@dinner.id }
+  =form.hidden_field :id
+  %a{href: "#"}
+    %span.round-thumb-large.img-rounded.pull-left{style:'background-color:rgb(111);', ondrop: 'dropImageIntoSpan(event, "dinners", "create")', ondragover: 'allowDrop(event)'}
+      Drop Image here.
+  .media-body
+    .dinner-text
+      .dinner-header.row-fuid
+        .span6
+          %strong
+            =t('dinners.title')
+          %br
+          = form.text_field :title
+        .span6
+          .nix
+            %strong
+              =t('dinners.dinner_start_date')              
+            %br
+            = render partial: "application/helpers/datetimepicker", locals:{ model_name: "dinner", field_name: "dinner_start_date"}
+            %br
+            %strong
+              =t('dinners.dinner_end_date') 
+            %br
+            = render partial: "application/helpers/datetimepicker", locals:{ model_name: "dinner", field_name: "dinner_end_date"}
+      .dinner-body.row-fluid
+        .span12
+          %strong
+            =t('dinners.description') 
+            %br
+          =form.text_area :description
+        %div= form.submit "Create", class: 'btn btn-primary'

@@ -1,0 +1,63 @@
+%div{ id: 'main', role: 'main'}
+  .container
+    .row-fluid
+      .span12
+        .well
+          .row-fluid
+            .span7
+              .well
+                %h4 Nearby Dinners
+                %ul.ul-dashboard-element
+                  - @dinners.each do |d|
+                    = render partial: "dinners/dinner_condensed", locals: {dinner: d}
+              .well
+                %h4 Hungry Hikers 
+                %ul.ul-dashboard-element
+                  .muted
+                    None
+            .span5
+              .well
+                %h4 
+                  Pending Requests
+                - if @incoming_requests.blank? && @outgoing_requests.blank?
+                  .muted
+                    None
+                - else
+                  %ul.ul-dashboard-element.ul-splitlist
+                    %h5
+                      %i.icon-download
+                      Incoming
+                    - if !@incoming_requests.blank?
+                      - @incoming_requests.each do |r|
+                        -if @incoming_requests.last==r
+                          %li.li-with-thumbnail.last{id: 'request_'+r.id.to_s}
+                            = render partial: "requests/request_condensed", locals: {request: r}
+
+                        - else
+                          %li.li-with-thumbnail{id: 'request_'+r.id.to_s}
+                            = render partial: "requests/request_condensed", locals: {request: r}
+                    - else
+                      .muted
+                        None
+                  %ul.ul-dashboard-element.ul-splitlist
+                    %h5
+                      %i.icon-upload
+                      Outgoing
+                    - if !@outgoing_requests.blank? 
+                      - @outgoing_requests.each do |r|
+                        -if @outgoing_requests.last==r
+                          %li.li-with-thumbnail.last{id: '#request_r.id'}
+                            = render partial: "requests/request_condensed", locals: {request: r}
+
+                        - else
+                          %li.li-with-thumbnail{id: '#request_r.id'}
+                            = render partial: "requests/request_condensed", locals: {request: r}
+                    - else
+                      .muted
+                        None
+              .well
+                %h4 
+                  Upcoming Dinners
+                %ul.ul-dashboard-element  
+                  .muted
+                    None        

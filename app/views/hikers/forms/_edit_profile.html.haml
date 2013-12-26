@@ -1,0 +1,33 @@
+= form_for @hiker, url: url_for(controller: "/hikers/registrations", action: "edit"), html: {multipart: true} do |form|   
+  =form.hidden_field :id
+  %a{href: "#"}
+    %span.round-thumb-large.img-rounded.pull-left{style:'background-color:rgb(111);', ondrop: 'dropImageIntoSpan(event, "hikers", "edit")', ondragover: 'allowDrop(event)'}
+      Drop Image here.
+  .media-body
+    .dinner-text
+      .dinner-header.row-fuid
+        .span12
+          .pull-right
+            %strong
+              =t('hikers.birth')              
+            %br
+            = render partial: "application/helpers/datepicker", locals:{ model_name: "hiker", field_name: "birth"}
+          .h5
+            %strong
+              =t('hikers.first_name') 
+            %br
+            = form.text_field :first_name
+            %br
+            %strong 
+              =t('hikers.last_name')
+            %br
+            = form.text_field :last_name
+        
+
+      .dinner-body.row-fluid
+        .span12
+          %strong
+            =t('hikers.about') 
+            %br
+          =form.text_area :about
+        %div= form.submit "Update", class: 'btn btn-primary'

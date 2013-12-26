@@ -1,0 +1,64 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.brand{ href: root_url }= t('application.title')
+
+      - if !hiker_signed_in?
+        %a.btn.btn-success.pull-right{ href:'#registerModal', data: { toggle: 'modal'} }
+          = t('application.navbar.links.register')
+
+        %a.btn.btn-success.pull-right{ href:'#loginModal', data: { toggle: 'modal'} } 
+          = t('application.navbar.links.login')
+      - else #Hiker signed in
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle{href: '#', data: { toggle: "dropdown" }}
+              %i.icon-food
+              = t('application.navbar.links.dinners')
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{href:url_for(controller: "/dinners", action: "new")} 
+                  = t('application.navbar.links.create_dinner')
+              %li
+                %a{href:url_for(controller: "/dinners", action: "show")} 
+                  = t('application.navbar.links.show_dinners')
+          %li
+            %a{href: '#'}
+              %i.icon-comment
+              = t('application.navbar.links.messages')
+          %li
+            %a{href: '#'}
+              %i.icon-group
+              = t('application.navbar.links.hikers')
+
+          %li
+            %a.notification-link-group{href: '#', data: {toggle: 'popover', placement: 'bottom', content: @notifications_content, html: "true", container: 'body'}}
+              %i.icon-bell.icon-large
+                %span.notification-count
+                  = fetch_notifications(current_hiker).size
+
+        %ul.nav.pull-right
+          %a.btn.btn-success.dropdown-toggle{data:{ toggle:'dropdown'}, href: '#'}
+            %i.icon-user
+            = current_hiker.username
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a{href: url_for(controller: "hikers/registrations", action: "edit")} 
+                %i.icon-edit
+                = t('application.navbar.links.edit_profile')
+            %li
+              %a{href:"#"} 
+                %i.icon-cog
+                = t('application.navbar.links.settings')
+            %li
+              %a{href:destroy_hiker_session_path, data: {method: 'delete'} }
+                %i.icon-off
+                = t('application.navbar.links.logout')
+
+              
+
+- if !hiker_signed_in?
+  = render partial:'application/devise/register_modal'
+  = render partial:'application/devise/login_modal'

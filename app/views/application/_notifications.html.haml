@@ -1,0 +1,8 @@
+%ul.nav.nav-list.notifications
+  %li.nav-header Notifications
+  - fetch_notifications(current_hiker).each do |notification|
+    =render partial: "notification", locals: { notification: notification}
+
+
+
+    

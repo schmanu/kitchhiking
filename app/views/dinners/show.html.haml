@@ -1,0 +1,12 @@
+%div{ id: 'main', role: 'main'}
+  .container
+    .row-fluid
+      .span12
+        .well
+          .row-fluid
+            .span12
+              .well
+                %ul.ul-dashboard-element
+                  - @dinners.each do |d|
+                    =render partial: "dinners/dinner_condensed", locals: { dinner: d}
+                  / = image_tag d.picture.url(:thumb)

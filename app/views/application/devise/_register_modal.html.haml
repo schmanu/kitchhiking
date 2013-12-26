@@ -1,0 +1,10 @@
+.modal.hide.fade{ id: 'registerModal', tabindex:'-1', role:'dialog', aria:{ labelledby: 'my Modallabel', hidden: true}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button',  data: { dismiss: 'modal'}, aria: { hidden: true}} &times;
+        %h4 Register
+      .modal-body
+        =render partial: 'hikers/new'
+      .modal-footer
+        %button.btn.btn-default{ data:{ dismiss: 'modal'}} Close

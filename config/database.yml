@@ -1,0 +1,26 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+common: &common
+  adapter: postgresql
+  host: localhost
+
+
+development:
+  <<: *common
+  database: kitchhiking_dev
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *common
+  database: kitchhiking_test
+  username: kitchhiking
+  password: 123
+
+production:
+  <<: *common
+  database: kitchhiking

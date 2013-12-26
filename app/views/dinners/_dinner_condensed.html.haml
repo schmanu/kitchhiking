@@ -1,0 +1,34 @@
+%li.li-with-thumbnail
+  %a{href: "#"}
+    - if !dinner.picture.blank?
+      %span.round-thumb-large.img-rounded.pull-left{id: 'dinner-img-upload', style:'background-image:url('+dinner.picture.url+');'}
+    - else
+      %span.round-thumb-large.img-rounded.pull-left{id: 'dinner-img-upload'}
+
+  .media-body
+    .dinner-text
+      .dinner-header.row-fuid
+        .span12
+          .h5
+            %a{href:"#"}
+              = dinner.title
+        
+            %small.pull-right
+              = timediff_string dinner.dinner_start_date
+          %a.no-hover-underline{href:"#", style: "color:rgba(0,0,0,0.5);"}
+            - if !dinner.hiker.avatar.blank?
+              %span.round-thumb-small.img-circle{style:'background-image:url('+dinner.hiker.avatar.url+');'}
+            %b.valign-super
+              = dinner.hiker.username
+      .dinner-body.row-fluid
+        .span12
+          =dinner.description
+      .dinner-footer.row-fluid
+        .span12
+          .pull-left
+            %i.icon-leaf{style: 'color:green;'}
+            vegan
+          .pull-right
+            %a{href: url_for(controller: "/requests", action: "new", dinnerid: dinner.id)}
+              %i.icon-envelope
+              Send Request

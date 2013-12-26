@@ -1,0 +1,13 @@
+%li.li-with-thumbnail.notification
+  %a.uncolored{href:"#"} 
+    %span.round-thumb-medium.img-rounded.pull-left{ style:'background-image:url('+notification.picture_url+');'}
+    .notification-body
+      %strong
+        = notification.subject
+      .description
+        = truncate(notification.description, length: 50)
+    .notification-footer
+      %i.black{class: notification.icon}
+      %small
+        = timediff_string notification.date
+      

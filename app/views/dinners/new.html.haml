@@ -1,0 +1,25 @@
+%div{ id: 'main', role: 'main'}
+  .container
+    .row-fluid
+      .span12
+        .well
+          .row-fluid
+            .span3
+              .well
+                %ul.nav.nav-list
+                  %li.nav-header Navigation
+                  %li.active
+                    %a{href:"#"} 
+                      Overview
+                  %li
+                    %a{href:"#"} 
+                      Details
+                  %li
+                    %a{href:"#"} 
+                      Privacy
+            .span9
+              .well
+                %h4 Create new Dinner
+                =render partial: "dinners/forms/create"
+
+                
