@@ -31,6 +31,28 @@ class RequestsController < ApplicationController
     end
   end
 
+  def update_state
+    @request = Request.find(params[:request][:id])
+    old_state = @request.state
+    new_state = params[:request][:state]
+    debugger
+    # Check for allowed State transitions
+    if old_state == 'active' and (new_state == 'declined' or new_state == 'accepted')
+      @request.state = new_state
+      success = @request.save
+      if success
+        respond_to do |format|
+          format.json  { render :json => {message: "Request #{new_state}.", status: 201}.to_json }
+        end
+      else
+        respond_to do |format|
+          logger.error @request.errors.to_hash(true).to_s
+          format.json  { render :json => {message: "Request could not be updated.", status: 500, errors: @request.errors.to_hash(true)}.to_json }
+        end
+      end
+    end
+  end
+
 
 
 

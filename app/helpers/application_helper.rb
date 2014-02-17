@@ -54,7 +54,7 @@ module ApplicationHelper
   end
 
   def fetch_notifications hiker 
-  requests = Request.all.where(dinner_id: Dinner.all.where(hiker: hiker)).order('created_at').reverse_order
+  requests = Request.all.where(state: 'active', dinner_id: Dinner.all.where(hiker: hiker)).order('created_at').reverse_order
   notifications = Array.new(requests.size)
     requests.each_index do |req_index|
       notifications[req_index] = Notification.new(

@@ -1,8 +1,7 @@
 %ul.nav.nav-list.notifications
   %li.nav-header Notifications
+  - if fetch_notifications(current_hiker).blank?
+    .muted 
+      None
   - fetch_notifications(current_hiker).each do |notification|
     =render partial: "notification", locals: { notification: notification}
-
-
-
-    

@@ -72,6 +72,17 @@ function postDinnerPicture(bin, file) {
      });  
 }
 
+function updateRequestState(id, new_state) {
+  $.post("http://localhost:3000/requests/update_state",
+  {
+    request: {
+      id: id,
+      state: new_state
+    }
+  }, function(data) { ajaxPostCreateCallback(data);
+  });
+}
+
 function ajaxPostCreateCallback(response) {
   if(response.status == 201) {
     toggleAlert(response.message, "success");
@@ -126,8 +137,10 @@ function addEventHandler(obj, evt, handler) {
 
 function answerRequest(id, accept) {
   if(accept) {
+    updateRequestState(id, "accepted");
     $("#request_"+id).css("background-color", "rgba(0,255,0,0.2)");
   } else {
+      updateRequestState(id, "declined");
         $("#request_"+id).css("background-color", "rgba(255,0,0,0.2)");
 
   }
