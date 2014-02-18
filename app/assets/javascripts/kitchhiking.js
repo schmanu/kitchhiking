@@ -47,7 +47,7 @@ function dropImageIntoSpan(e, controller, action){
 }
 
 function postHikerAvatar(bin, file) {
-    $.post("http://localhost:3000/hikers/edit",
+    $.post("/hikers/edit",
     {
       hiker: {
         avatar: encodeURIComponent(bin),
@@ -60,7 +60,7 @@ function postHikerAvatar(bin, file) {
 }
 
 function postDinnerPicture(bin, file) {
-    $.post("http://localhost:3000/dinners/create",
+    $.post("/dinners/create",
     {
       dinner: {
         picture: encodeURIComponent(bin),
@@ -73,7 +73,7 @@ function postDinnerPicture(bin, file) {
 }
 
 function updateRequestState(id, new_state) {
-  $.post("http://localhost:3000/requests/update_state",
+  $.post("/requests/update_state",
   {
     request: {
       id: id,

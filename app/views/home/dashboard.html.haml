@@ -65,8 +65,12 @@
                     - else
                       .muted
                         None
-              .well
-                %h4 Hungry Hikers 
-                %ul.ul-dashboard-element
+              - if !@hungry_hikers.blank?
+                .well.hiker-gallery
+                  %h4 Hungry Hikers 
+                  = render partial: "hikers/gallery", locals: {hikers: @hungry_hikers}
+              - else
+                .well
+                  %h4 Hungry Hikers
                   .muted
-                    None  
+                    None

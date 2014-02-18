@@ -60,4 +60,8 @@ class DinnersController < ApplicationController
   def show
     @dinners = Dinner.all.where(hiker: current_hiker, active: true).order("dinner_start_date")
   end
+
+  def details
+    @dinner = Dinner.find(params[:dinnerid])
+  end
 end

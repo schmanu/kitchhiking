@@ -109,6 +109,19 @@ a.notification-link-group:hover .notification-count {
   padding:60px;
 }
 
+.hiker-gallery {
+  width: 92%;
+  float: left;
+}
+
+.gallery-picture {
+  float: left;
+  height: 82px;
+  width: 82px;
+  background-position: center;
+  background-size: cover;
+}
+
  .navbar a.btn {
   margin-left: 5px;
 } 

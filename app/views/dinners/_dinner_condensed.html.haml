@@ -10,7 +10,7 @@
       .dinner-header.row-fuid
         .span12
           .h5
-            %a{href:"#"}
+            %a{href: url_for(controller:"/dinners", action: "details", dinnerid: dinner.id)}
               = dinner.title
         
             %small.pull-right

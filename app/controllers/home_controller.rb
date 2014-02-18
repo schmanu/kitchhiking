@@ -26,6 +26,10 @@ class HomeController < ApplicationController
       @upcoming_dinners = @upcoming_dinners.sort{|a,b| a.dinner_start_date <=> b.dinner_start_date }
       respond_to do |format|
         format.html { render template: "home/dashboard" }
+      @hungry_hikers = Hiker.all.where("id != :current_hiker", {current_hiker: current_hiker})
+        .where("avatar_file_name IS NOT NULL")
+        .order("RANDOM()").limit(10);
+
       end
     end
   end
