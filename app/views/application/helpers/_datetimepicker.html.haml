@@ -1,4 +1,4 @@
 .input-append.datetimepicker
-  %input{data: {format:"MM/dd/yyyy hh:mm"}, type:"text", name:model_name+"["+field_name+"]", id: model_name+"_"+field_name}
+  %input{data: {format:"MM/dd/yyyy hh:mm"}, type:"text", name:model_name+"["+field_name+"]", id: model_name+"_"+field_name, value: field_value.strftime('%m/%d/%Y %H:%M')}
   %span.add-on
     %i{data: {time:{icon:"icon-time"}, date:{icon:"icon-calendar"}}}

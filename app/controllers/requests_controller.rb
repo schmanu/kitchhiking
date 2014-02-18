@@ -35,7 +35,6 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:request][:id])
     old_state = @request.state
     new_state = params[:request][:state]
-    debugger
     # Check for allowed State transitions
     if old_state == 'active' and (new_state == 'declined' or new_state == 'accepted')
       @request.state = new_state

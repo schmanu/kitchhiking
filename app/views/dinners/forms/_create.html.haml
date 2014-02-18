@@ -17,12 +17,12 @@
             %strong
               =t('dinners.dinner_start_date')              
             %br
-            = render partial: "application/helpers/datetimepicker", locals:{ model_name: "dinner", field_name: "dinner_start_date"}
+            = render partial: "application/helpers/datetimepicker", locals:{ model_name: "dinner", field_name: "dinner_start_date", field_value: @dinner.dinner_start_date}
             %br
             %strong
               =t('dinners.dinner_end_date') 
             %br
-            = render partial: "application/helpers/datetimepicker", locals:{ model_name: "dinner", field_name: "dinner_end_date"}
+            = render partial: "application/helpers/datetimepicker", locals:{ model_name: "dinner", field_name: "dinner_end_date", field_value: @dinner.dinner_end_date}
       .dinner-body.row-fluid
         .span12
           %strong

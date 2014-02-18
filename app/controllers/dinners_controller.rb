@@ -38,10 +38,14 @@ class DinnersController < ApplicationController
       else
         dinner.title = params[:dinner][:title]
         dinner.hiker = current_hiker
-        dinner.dinner_start_date=DateTime.strptime(params[:dinner][:dinner_start_date]+" CET", '%m/%d/%Y %H:%M %Z')
-        dinner.dinner_end_date=DateTime.strptime(params[:dinner][:dinner_end_date]+" CET", '%m/%d/%Y %H:%M %Z')
         dinner.description = params[:dinner][:description]
         dinner.active = true
+        begin
+          dinner.dinner_start_date=DateTime.strptime(params[:dinner][:dinner_start_date]+" CET", '%m/%d/%Y %H:%M %Z')
+          dinner.dinner_end_date=DateTime.strptime(params[:dinner][:dinner_end_date]+" CET", '%m/%d/%Y %H:%M %Z')
+        rescue ArgumentError
+          logger.debug "Invalid Date Format when creating a Dinner!"
+        end
         result = dinner.save
       	
       	if !result

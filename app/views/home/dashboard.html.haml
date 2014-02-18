@@ -6,13 +6,23 @@
           .row-fluid
             .span7
               .well
-                %h4 Nearby Dinners
-                %ul.ul-dashboard-element
-                  - @dinners.each do |d|
-                    = render partial: "dinners/dinner_condensed", locals: {dinner: d}
+                %h4 
+                  Upcoming Dinners
+                - if !@upcoming_dinners.blank?
+                  %ul.ul-dashboard-element
+                    - @upcoming_dinners.each do |d|
+                      = render partial: "dinners/dinner_condensed", locals: {dinner: d}
+                - else
+                  .muted
+                    None  
               .well
-                %h4 Hungry Hikers 
-                %ul.ul-dashboard-element
+                %h4 
+                  Nearby Dinners
+                - if !@nearby_dinners.blank?
+                  %ul.ul-dashboard-element
+                    - @nearby_dinners.each do |d|
+                      = render partial: "dinners/dinner_condensed", locals: {dinner: d}
+                - else
                   .muted
                     None
             .span5
@@ -56,8 +66,7 @@
                       .muted
                         None
               .well
-                %h4 
-                  Upcoming Dinners
-                %ul.ul-dashboard-element  
+                %h4 Hungry Hikers 
+                %ul.ul-dashboard-element
                   .muted
-                    None        
+                    None  

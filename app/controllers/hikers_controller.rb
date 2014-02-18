@@ -36,7 +36,11 @@ class HikersController < ApplicationController
         else
           @hiker.first_name = params[:hiker][:first_name]
           @hiker.last_name = params[:hiker][:last_name]
-          @hiker.birth = Date.strptime(params[:hiker][:birth]+" CET", '%m/%d/%Y %Z')
+          begin
+            @hiker.birth = Date.strptime(params[:hiker][:birth]+" CET", '%m/%d/%Y %Z')
+          rescue ArgumentError
+            logger.debug "Invalid Date Format when creating a Dinner!"
+          end
           @hiker.about = params[:hiker][:about]
           @hiker.save
           redirect_to root_url

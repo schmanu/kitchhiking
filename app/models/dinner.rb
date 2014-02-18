@@ -5,6 +5,8 @@ class Dinner < ActiveRecord::Base
   has_attached_file :picture, styles: { medium: "300x300>", thumb: "75x75>"}, 
   default_url: "/img/:style/missing.png"
   validates :hiker, :presence => true
+  validates :dinner_start_date, :presence => true
+  validates :dinner_end_date, :presence => true
   validates_inclusion_of :active, :in => [true, false]
 
   after_initialize :init_default_values

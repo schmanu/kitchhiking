@@ -11,7 +11,7 @@
             %strong
               =t('hikers.birth')              
             %br
-            = render partial: "application/helpers/datepicker", locals:{ model_name: "hiker", field_name: "birth"}
+            = render partial: "application/helpers/datepicker", locals:{ model_name: "hiker", field_name: "birth", field_value: @hiker.birth}
           .h5
             %strong
               =t('hikers.first_name') 

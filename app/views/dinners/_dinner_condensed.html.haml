@@ -28,7 +28,8 @@
           .pull-left
             %i.icon-leaf{style: 'color:green;'}
             vegan
-          .pull-right
-            %a{href: url_for(controller: "/requests", action: "new", dinnerid: dinner.id)}
-              %i.icon-envelope
-              Send Request
+          - if isRequestLinkRequired?(dinner.id, current_hiker.id)
+            .pull-right
+              %a{href: url_for(controller: "/requests", action: "new", dinnerid: dinner.id)}
+                %i.icon-envelope
+                Send Request
