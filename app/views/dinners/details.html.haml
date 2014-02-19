@@ -4,15 +4,19 @@
       .span12
         .well
           .row-fluid
-            .span12
+            .span3
               .well
-                %h4 
-                  Details for
-                  = @dinner.title 
-          .row-fluid
-            .span4
-              .well
-                %h4 Participants
-            .span8
-              .well
-                %h4 Pictures 
+                %ul.nav.nav-list{id: "#dinner_detail_tabs"}
+                  %li.nav-header Navigation
+                  %li.active
+                    %a{href:"#overview", data: {toggle: "tab"}} 
+                      Overview
+                  %li
+                    %a{href:"#gallery", data: {toggle: "tab"}} 
+                      Gallery
+            .span9
+              .tab-content
+                .tab-pane.fade.active.in{id: "overview"}
+                  = render partial: "dinners/details/overview"
+                .tab-pane.fade{id: "gallery"}
+                  = render partial: "dinners/details/gallery"

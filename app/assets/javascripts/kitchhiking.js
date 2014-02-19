@@ -9,6 +9,13 @@ function initPopovers(){
 
 }
 
+function initTabs(){
+  $('#dinner_detail_tabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
+}
+
 function allowDrop(event){
   event.preventDefault();
 }

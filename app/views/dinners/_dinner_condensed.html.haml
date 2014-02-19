@@ -22,7 +22,7 @@
               = dinner.hiker.username
       .dinner-body.row-fluid
         .span12
-          =dinner.description
+          = truncate(dinner.description, length: 100)
       .dinner-footer.row-fluid
         .span12
           .pull-left

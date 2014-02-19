@@ -1,0 +1,27 @@
+.well
+  .row-fluid
+    .span12
+      %a{href: "#"}
+        .thumbnail-container
+          - if !@dinner.picture.blank?
+            %span.round-thumb-large.img-rounded.pull-left{id: 'dinner-img-upload', style:'background-image:url('+@dinner.picture.url+');'}
+          - else
+            %span.round-thumb-large.img-rounded.pull-left{id: 'dinner-img-upload'}
+      .media-body
+        .dinner-text
+          .dinner-header.row-fluid
+            .span12
+              %h5.pull-left
+                =@dinner.title
+              %small.pull-right
+                .small-margin
+                  = timediff_string(@dinner.dinner_start_date) + " - " + timediff_string(@dinner.dinner_end_date)
+          .dinner-body.row-fluid
+            .span12
+              = @dinner.description + "LAnger langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer Text"
+  %hr
+  .row-fluid
+    .span4
+      %h5 Participants
+    .span8
+      %h5 Comments 
