@@ -6,9 +6,6 @@ gem 'rails', '4.0.0'
 #File management
 gem "paperclip"
 
-#debugger
-gem "debugger"
-
 #datetime picker
 gem 'bootstrap-datetimepicker-rails'
 
