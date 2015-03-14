@@ -109,17 +109,44 @@ a.notification-link-group:hover .notification-count {
   padding:60px;
 }
 
-.hiker-gallery {
+.gallery {
   width: 92%;
   float: left;
+}
+.gallery.embedded {
+  width: 100%;
+}
+.gallery.full {
+  width: 100%;
+}
+
+.gallery.full .gallery-picture {
+  height: 100px;
+  width: 100px;
+}
+
+.gallery .gallery-picture {
+  height: 82px;
+  width: 82px;  
 }
 
 .gallery-picture {
   float: left;
-  height: 82px;
-  width: 82px;
   background-position: center;
   background-size: cover;
+}
+
+.gallery-upload {
+  height: 70px;
+  width: 100px;
+  display: inline-block;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid;
+  border-color: rgba(0,0,0,0.5);
+  text-align: center;
+  padding-top: 30px;
+  font-size: 0.9em;
 }
 
  .navbar a.btn {
@@ -247,3 +274,32 @@ font-size: 0.9em;
   background-color: rgba(255,255,255,0.9);
 }
 
+#ajax-loader {
+    z-index: 1100;
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    left: 0;
+    top: 0;
+    width:100%;
+    height:100%;
+    display:none;
+}
+
+
+#ajax-loader i{
+    z-index: 1100;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    color: #FFF;
+    font-size: 5em;
+
+}
+
+[contenteditable="true"] { 
+  margin-left: 5px; 
+  color: #555;
+  padding: 5px; 
+  background-color: #FFF;
+  border-radius:4px;
+}

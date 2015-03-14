@@ -13,16 +13,10 @@ class HomeController < ApplicationController
         .where(active: true)
         .where("dinner_start_date > :current_date", {current_date: Time.now})
         .order("dinner_start_date")
-      @upcoming_dinners = Dinner.all
-        .where(hiker: current_hiker)
-        .where(active: true)
+      @upcoming_dinners = Dinner.created_by(current_hiker)
         .where("dinner_end_date > :current_date", {current_date: Time.now})
-        .order("dinner_start_date")
-      @upcoming_dinners += Dinner.all
-        .where(active: true, id: 
-          Request.all.where(state: 'accepted', hiker: current_hiker).select('dinner_id'))
+      @upcoming_dinners += Dinner.attended_by(current_hiker)
         .where("dinner_end_date > :current_date", {current_date: Time.now})
-        .order("dinner_start_date")
       @upcoming_dinners = @upcoming_dinners.sort{|a,b| a.dinner_start_date <=> b.dinner_start_date }
       respond_to do |format|
         format.html { render template: "home/dashboard" }

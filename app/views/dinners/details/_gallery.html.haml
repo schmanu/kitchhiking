@@ -2,3 +2,9 @@
   .row-fluid
     .span12
       %h4 Gallery
+    .gallery.full
+      - @dinner.pictures.each do |picture| 
+        .gallery-picture{style:'background-image:url('+h.avatar.url+');'}
+      %span.gallery-upload.img-rounded{style:'background-color:rgb(111);', ondrop: 'dropImageIntoSpan(event, "dinners", "create")', ondragover: 'allowDrop(event)'}
+        Drop Images here
+      

@@ -1,4 +1,7 @@
 class DinnersController < ApplicationController
+  before_filter :authenticate_hiker!
+  before_action :correct_user,   only: [:update]
+
   def new
   	@dinner = Dinner.new(title: current_hiker.username+"'s Dinner", 
                         active: false,
@@ -51,7 +54,7 @@ class DinnersController < ApplicationController
       	if !result
       	  session[:errors] = dinner.errors.to_hash(true)
         else
-          redirect_to root_url
+          redirect_to action: "details", dinnerid: dinner.id
         end
       end
     end
@@ -63,5 +66,42 @@ class DinnersController < ApplicationController
 
   def details
     @dinner = Dinner.find(params[:dinnerid])
+    @participants = Hiker.creator_of(@dinner)
+    @participants += Hiker.attending(@dinner)
   end
+
+  def update
+    sleep(1.5);
+    dinner = Dinner.find(params[:dinner][:id])
+    if request.post? || request.put?  || request.patch?
+      dinner.title = params[:dinner][:title]
+      dinner.description = params[:dinner][:description]
+      result = dinner.save
+      if !result
+        respond_to do |format|
+          format.json  { render :json => {message: "Changes could not be made!", status: 500, errors: dinner.errors.to_hash(true)}.to_json }
+        end 
+      else
+        respond_to do |format|
+          format.json  { render :json => {message: "Dinner successfully updated!", status: 201}.to_json }
+        end       
+      end
+    end
+  end
+
+  private
+
+  def correct_user
+    dinner = Dinner.find(params[:dinner][:id])
+    if current_hiker != dinner.hiker
+        dinner.hiker.errors = "Only the owner of a dinner can make changes!"
+      if request.post? 
+        respond_to do |format|
+          format.json  { render :json => {message: "Changes could not be made!", status: 500, errors: dinner.errors.to_hash(true)}.to_json }
+        end
+      end
+      redirect_to action: "details"
+    end
+  end
+
 end

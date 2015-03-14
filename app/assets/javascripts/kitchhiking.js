@@ -16,6 +16,105 @@ function initTabs(){
   })
 }
 
+function initSwitches(){
+  $('.switch').bootstrapSwitch();
+
+  //Initialize View Mode switches
+  $('#view_mode_switch').on('switchChange', switchMode);
+}
+
+function switchMode(e, data) {
+  var $element = $(data.el),
+  value = data.value;
+
+  //switch state:
+  if(value) {
+    //try to save all editable values and show ajax load gif
+    saveEditableForm();
+
+ 
+  } else {
+    //switch all editables to edit mode
+    //wrap long values in textareas
+    var emptyTextArea = $("<textarea />");
+    $(".editable.longvalue").each(function() {
+      var editable = $(this);
+      var innerText = editable.text().trim();
+      var width = editable.width()-20;
+      var height = editable.height()+10;
+      editable.text("");
+      newTextarea = emptyTextArea.clone();
+      newTextarea.text(innerText);
+      newTextarea.width(width);
+      newTextarea.height(height);
+      editable.append(newTextarea);
+    });
+
+    //Make contenteditable for short values
+    $(".editable.shortvalue").each(function() {
+      var editable = $(this);
+      editable.attr("contenteditable", "true");
+    });
+    
+
+  }
+}
+
+function ajaxSaveFormCallback(response) {
+  if(response.status == 201) {
+    toggleAlert(response.message, "success");
+   //switch all editables to view mode on callback
+    $(".editable.longvalue").each(function() {
+      var editable = $(this);
+      var innerText = editable.children().val().trim();
+      editable.children().remove();
+      editable.text(innerText);  
+    });
+
+    //remove contenteditable for short values
+    $(".editable.shortvalue").each(function() {
+      var editable = $(this);
+      editable.attr("contenteditable", "false");
+    });
+  }
+  else {
+    toggleAlert("Error while saving changes.", "error");
+  }
+  $("#ajax-loader").hide();
+  
+}
+
+function saveEditableForm() {
+  //Collect Form Data and Values
+  $("#ajax-loader").show();
+  var form = $(".editable-form");
+  var controller = form.attr("controller");
+  var action = form.attr("action");
+  var id = form.attr("oid");
+  var objectmodel = form.attr("objectmodel");
+
+  var jsonValues = {};
+  var innerobj = {};
+  innerobj["id"] = id;
+    $(".editable.longvalue").each(function() {
+      var editable = $(this);
+      var innerText = editable.children().val().trim();
+      var data = editable.attr("data");
+      innerobj[data] = innerText;
+    });
+
+    $(".editable.shortvalue").each(function() {
+      var editable = $(this);
+      var innerText = editable.text().trim();
+      var data = editable.attr("data");
+      innerobj[data] = innerText;
+    });
+
+    jsonValues[objectmodel] = innerobj;
+
+    $.post("/"+controller+"/"+action, jsonValues, ajaxSaveFormCallback);
+}
+
 function allowDrop(event){
   event.preventDefault();
 }

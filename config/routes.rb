@@ -2,6 +2,7 @@ Kitchhiking::Application.routes.draw do
   get "dinners/new"
   get "dinners/show"
   get "dinners/details/:dinnerid", to: "dinners#details"
+  post "dinners/update"
   get "home/index"
   post "dinners/create"
   patch "dinners/create"

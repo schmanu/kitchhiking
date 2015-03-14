@@ -1,5 +1,5 @@
 .well
-  .row-fluid
+  .row-fluid.editable-form{controller: "dinners", action:"update", objectmodel: "dinner", oid:@dinner.id}
     .span12
       %a{href: "#"}
         .thumbnail-container
@@ -12,16 +12,22 @@
           .dinner-header.row-fluid
             .span12
               %h5.pull-left
-                =@dinner.title
+                .editable.shortvalue{data:"title"}
+                  =@dinner.title
               %small.pull-right
                 .small-margin
                   = timediff_string(@dinner.dinner_start_date) + " - " + timediff_string(@dinner.dinner_end_date)
           .dinner-body.row-fluid
             .span12
-              = @dinner.description + "LAnger langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer langer Text"
+              .editable.longvalue{data:"description"}
+                = @dinner.description
   %hr
   .row-fluid
     .span4
       %h5 Participants
+      .gallery.embedded
+        = render partial: "hikers/gallery", locals: {hikers: @participants}
     .span8
       %h5 Comments 
+      .muted
+        None

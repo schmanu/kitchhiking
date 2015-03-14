@@ -35,6 +35,7 @@ class Request < ActiveRecord::Base
 	def check_state_change
 	#	errors.add(:state, :illegal, 
 	#		"Something")
+
 	end
 
 	def init_default_values

@@ -2,12 +2,20 @@ class Dinner < ActiveRecord::Base
   belongs_to :hiker
   has_many :requests
   has_many :reviews
+  has_many :pictures, as: :imageable
   has_attached_file :picture, styles: { medium: "300x300>", thumb: "75x75>"}, 
   default_url: "/img/:style/missing.png"
   validates :hiker, :presence => true
   validates :dinner_start_date, :presence => true
   validates :dinner_end_date, :presence => true
   validates_inclusion_of :active, :in => [true, false]
+  scope :active, -> {where(active: true)}
+  scope :after, -> (time) { where("dinner_end_date < ?", time)}
+  scope :created_by, -> (hiker) {active.where(hiker: hiker)}
+  scope :attended_by, -> (hiker) {
+    active.where(id: 
+          Request.all.where(state: 'accepted', hiker: hiker).select('dinner_id'))
+        }
 
   after_initialize :init_default_values
   def time_left
@@ -38,6 +46,7 @@ class Dinner < ActiveRecord::Base
 
     # timediff_string(Time.now, self.dinner_start_date)
   end
+
 
   
 

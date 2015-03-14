@@ -14,6 +14,8 @@
                   %li
                     %a{href:"#gallery", data: {toggle: "tab"}} 
                       Gallery
+              - if current_hiker == @dinner.hiker
+                %input.switch{id:"view_mode_switch", type:"checkbox", checked:true, data: { on:{color:"info", text:"<span class='icon-globe'></span>"}, off:{color:"warning", text:"<span class='icon-pencil'></span>"}}}
             .span9
               .tab-content
                 .tab-pane.fade.active.in{id: "overview"}

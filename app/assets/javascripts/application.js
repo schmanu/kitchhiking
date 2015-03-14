@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require kitchhiking
 //= require bootstrap-datetimepicker
+//= require bootstrap-switch
